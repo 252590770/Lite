@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#33000000"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="146dp"
+        android:layout_height="146dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/bg_bt"
+        />
+
+    <RelativeLayout
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:id="@+id/point"
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:layout_marginLeft="72dp"
+            android:layout_marginTop="0dp"
+            android:src="@drawable/loadingpoint"
+            android:layout_alignParentStart="true"/>
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginTop="20dp"-->
+
+        <LinearLayout
+            android:visibility="visible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="车辆网络"
+                android:textColor="#1F99FF"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="连接中..."
+                android:layout_gravity="center_horizontal"
+                android:textColor="#888888"
+                android:textSize="16sp"/>
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>
