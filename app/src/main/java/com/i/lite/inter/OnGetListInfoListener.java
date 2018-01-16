@@ -12,5 +12,5 @@ import java.util.ArrayList;
 
 public interface OnGetListInfoListener {
     void onSuccess(ArrayList<GetListResult> listResults);
-    void onError(Object error);
+    void onError(Object err);
 }
