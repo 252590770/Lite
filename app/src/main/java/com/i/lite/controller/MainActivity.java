@@ -1,6 +1,7 @@
 package com.i.lite.controller;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -95,4 +96,9 @@ public class MainActivity extends Activity implements OnNewsListener ,OnGetListI
     }
 
 
+    public void onNext(View view) {
+
+        startActivity(new Intent(this,MyActivity.class));
+
+    }
 }
