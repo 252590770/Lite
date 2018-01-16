@@ -54,6 +54,7 @@ public class InfoListModelImpl implements InfoListModel {
                     public void onError(@NonNull Throwable e) {
                         getListInfoListener.onError(e);
                         Log.i("ccccccc","onError="+e.toString());
+                        Log.i("ccccccc","onError="+e.toString());
                     }
 
                     @Override

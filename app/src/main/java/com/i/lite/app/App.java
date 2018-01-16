@@ -33,6 +33,7 @@ public class App extends Application {
         }
 
         Log.i("ccccccc","api="+api.toString());
+        Log.i("ccccccc","api="+api.toString());
         Log.i("ccccccc","retrofit="+retrofit.toString());
 
         return api;
