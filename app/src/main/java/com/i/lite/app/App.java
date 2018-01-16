@@ -1,6 +1,9 @@
 package com.i.lite.app;
 
 import android.app.Application;
+import android.util.Log;
+
+import com.i.lite.api.API;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -12,12 +15,30 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class App extends Application {
 
+    public static API api;
     private static Retrofit retrofit = null;
 
     @Override
     public void onCreate() {
         super.onCreate();
     }
+
+
+
+
+    public static API getAPI() {
+
+        if(api == null ){
+            api = App.getRetrofit().create(API.class);
+        }
+
+        Log.i("ccccccc","api="+api.toString());
+        Log.i("ccccccc","retrofit="+retrofit.toString());
+
+        return api;
+
+    }
+
 
     public static Retrofit getRetrofit() {
 

@@ -1,6 +1,8 @@
 package com.i.lite.model.modelimpl;
 
+import android.net.http.HttpResponseCache;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.i.lite.api.API;
 import com.i.lite.app.App;
@@ -12,11 +14,15 @@ import com.i.lite.entity.GetListResult;
 import com.i.lite.inter.OnGetListInfoListener;
 import com.i.lite.model.modelinter.InfoListModel;
 
+import org.reactivestreams.Subscriber;
+
 import java.util.ArrayList;
 
 import io.reactivex.ObservableSource;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
@@ -27,23 +33,66 @@ import io.reactivex.schedulers.Schedulers;
 
 public class InfoListModelImpl implements InfoListModel {
 
-    public API api;
 
     @Override
     public void getInfoList(GetListParam param,final OnGetListInfoListener getListInfoListener) {
 
-        Log.i("cccccc","Order_id == "+param.order_id);
-
-        api = App.getRetrofit().create(API.class);
-        api.getListWithRx(param.method,param.order_id)//method=getDrivigOrder&page=1
+        App.getAPI().getListWithRx(param.method,param.order_id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<ArrayList<GetListResult>>() {
+                .subscribe(new Observer<ArrayList<GetListResult>>() {
                     @Override
-                    public void accept(@NonNull ArrayList<GetListResult> getListResults) throws Exception {
-                        getListInfoListener.onSuccess(getListResults);
+                    public void onSubscribe(@NonNull Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(@NonNull ArrayList<GetListResult> listResults) {
+                        getListInfoListener.onSuccess(listResults);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        getListInfoListener.onError(e);
+                        Log.i("ccccccc","onError="+e.toString());
+                    }
+
+                    @Override
+                    public void onComplete() {
                     }
                 });
+
+
+
+
+
+/*
+
+            App.getAPI().getListWithRx(param.method,param.order_id)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Consumer<ArrayList<GetListResult>>() {
+                        @Override
+                        public void accept(@NonNull ArrayList<GetListResult> getListResults) throws Exception {
+
+
+                            try {
+
+                                getListInfoListener.onSuccess(getListResults);
+
+                            }catch (Exception e){
+                                getListInfoListener.onError(null);
+                                Log.i("ccccccc","onError="+e.toString());
+                                Log.i("ccccccc","name  onError="+InfoListModelImpl.this.toString());
+                            }
+
+
+                        }
+                    });
+
+*/
+
+
+
 
     }
 

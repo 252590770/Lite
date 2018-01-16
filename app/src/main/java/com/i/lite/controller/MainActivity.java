@@ -12,6 +12,7 @@ import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.i.lite.R;
 import com.i.lite.entity.GetListParam;
@@ -28,6 +29,7 @@ public class MainActivity extends Activity implements OnNewsListener ,OnGetListI
 
     TextView tv;
     int order_id=1;
+    InfoListModelImpl model = new InfoListModelImpl();
 
     MyProgressDialog progressDialog;
     @Override
@@ -40,9 +42,13 @@ public class MainActivity extends Activity implements OnNewsListener ,OnGetListI
 
     public void getNews(View view) {
 
-        progressDialog.showPop();
-        new InfoListModelImpl().getInfoList(new GetListParam("getDrivig",order_id+""),this);
 
+        progressDialog.showPop();
+        model.getInfoList(new GetListParam("getDrivig",order_id+""),this);
+
+        Log.i("ccccccc","model="+model.toString());
+        Log.i("ccccccc","order_id="+order_id);
+        order_id++;
     }
 
     @Override
@@ -66,7 +72,7 @@ public class MainActivity extends Activity implements OnNewsListener ,OnGetListI
             @Override
             public void run() {
                 try {
-                    sleep(5000);
+                    sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -82,7 +88,13 @@ public class MainActivity extends Activity implements OnNewsListener ,OnGetListI
     }
 
     @Override
-    public void onError(OnGetListInfoListener listener) {
+    public void onError(Object error) {
+
+        Throwable e = (Throwable)error;
+
+        Toast.makeText(this,e.toString(),Toast.LENGTH_SHORT).show();
+        progressDialog.closePop();
     }
+
 
 }
