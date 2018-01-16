@@ -91,7 +91,6 @@ public class MainActivity extends Activity implements OnNewsListener ,OnGetListI
     public void onError(Object error) {
 
         Throwable e = (Throwable)error;
-
         Toast.makeText(this,e.toString(),Toast.LENGTH_SHORT).show();
         progressDialog.closePop();
     }
