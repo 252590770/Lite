@@ -58,7 +58,6 @@ public class MainActivity extends Activity implements OnNewsListener ,OnGetListI
 
     @Override
     public void onError(OnNewsListener listener) {
-
     }
 
 
