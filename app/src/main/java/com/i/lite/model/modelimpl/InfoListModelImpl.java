@@ -47,7 +47,12 @@ public class InfoListModelImpl implements InfoListModel {
 
                     @Override
                     public void onNext(@NonNull ArrayList<GetListResult> listResults) {
-                        getListInfoListener.onSuccess(listResults);
+                        try {
+                            getListInfoListener.onSuccess(listResults);
+                        }catch (Exception e){
+                            getListInfoListener.onError(e);
+                        }
+
                     }
 
                     @Override
