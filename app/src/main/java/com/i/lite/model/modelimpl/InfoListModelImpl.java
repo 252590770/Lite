@@ -1,12 +1,14 @@
 package com.i.lite.model.modelimpl;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.i.lite.app.App;
 import com.i.lite.entity.GetListParam;
 import com.i.lite.entity.GetListResult;
 import com.i.lite.inter.OnGetListInfoListener;
 import com.i.lite.model.modelinter.InfoListModel;
+import com.i.lite.utils.NetworkUtil;
 
 import java.util.ArrayList;
 
@@ -25,6 +27,13 @@ public class InfoListModelImpl implements InfoListModel {
 
     @Override
     public void getInfoList(GetListParam param,final OnGetListInfoListener getListInfoListener) {
+
+        if (!NetworkUtil.isNetworkAvailable(App.getContext())) {
+//            Toast.makeText(App.getContext(), "没有网络O", Toast.LENGTH_SHORT).show();
+            getListInfoListener.onError(new Exception("没有网络o"));
+            return;
+        }
+
 
         App.getAPI().getListWithRx(param.method,param.order_id)
                 .subscribeOn(Schedulers.io())
