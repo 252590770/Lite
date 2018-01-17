@@ -1,6 +1,7 @@
 package com.i.lite.model.modelimpl;
 
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.widget.Toast;
 
 import com.i.lite.app.App;
@@ -34,6 +35,7 @@ public class InfoListModelImpl implements InfoListModel {
             return;
         }
 
+        LayoutInflater.from(App.getContext());
 
         App.getAPI().getListWithRx(param.method,param.order_id)
                 .subscribeOn(Schedulers.io())
@@ -69,31 +71,7 @@ public class InfoListModelImpl implements InfoListModel {
 
 
 
-/*
 
-            App.getAPI().getListWithRx(param.method,param.order_id)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Consumer<ArrayList<GetListResult>>() {
-                        @Override
-                        public void accept(@NonNull ArrayList<GetListResult> getListResults) throws Exception {
-
-
-                            try {
-
-                                getListInfoListener.onSuccess(getListResults);
-
-                            }catch (Exception e){
-                                getListInfoListener.onError(null);
-                                Log.i("ccccccc","onError="+e.toString());
-                                Log.i("ccccccc","name  onError="+InfoListModelImpl.this.toString());
-                            }
-
-
-                        }
-                    });
-
-*/
 
 
 
