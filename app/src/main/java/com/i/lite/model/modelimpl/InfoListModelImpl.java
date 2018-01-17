@@ -1,30 +1,19 @@
 package com.i.lite.model.modelimpl;
 
-import android.net.http.HttpResponseCache;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.i.lite.api.API;
 import com.i.lite.app.App;
-import com.i.lite.controller.MainActivity;
-import com.i.lite.entity.DrivigOrderParam;
-import com.i.lite.entity.DrivigOrderResult;
 import com.i.lite.entity.GetListParam;
 import com.i.lite.entity.GetListResult;
 import com.i.lite.inter.OnGetListInfoListener;
 import com.i.lite.model.modelinter.InfoListModel;
 
-import org.reactivestreams.Subscriber;
-
 import java.util.ArrayList;
 
-import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
