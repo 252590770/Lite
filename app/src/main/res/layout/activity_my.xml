@@ -43,7 +43,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:onClick="getNews"
         android:id="@+id/button2"
         android:layout_marginStart="19dp"
         android:layout_centerVertical="true"

@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -60,8 +61,11 @@ public class MyActivity extends Activity  {
         iv = (ImageView) findViewById(R.id.iv);
 
         checkPermission();
-
         roadImageView(Uri.parse(SPTool.getContent(mContext, "USER_PHOTO")), iv);
+
+        //头像上传服务器
+        String filePath = Uri.parse(SPTool.getContent(mContext, "USER_PHOTO")).getPath();
+        UploadFileThread("url",filePath,new Handler());
 
     }
 
@@ -239,6 +243,14 @@ public class MyActivity extends Activity  {
         Log.i("", "生成的照片输出路径：" + imageFilePath[0].toString());
         return imageFilePath[0];
     }//1023403858
+
+
+    public void UploadFileThread(String url, String filePath, Handler handler) {
+
+
+    }
+
+
 
     public static Bitmap getLoacalBitmap(String url) {
         try {
