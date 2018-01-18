@@ -7,6 +7,7 @@ import android.util.Log;
 import com.i.lite.api.API;
 import com.i.lite.config.CacheInterceptor;
 import com.i.lite.config.HttpCache;
+import com.i.lite.utils.CrashHandler;
 
 import java.util.concurrent.TimeUnit;
 
@@ -29,15 +30,15 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        context = getApplicationContext();
+        //全局错误日志打印
+        CrashHandler crashHandler = CrashHandler.getInstance();
+        crashHandler.init(getApplicationContext());
+
     }
 
 
     public static Context getContext() {
-
-        if (context == null) {
-            context = getContext();
-        }
-
         return context;
     }
 

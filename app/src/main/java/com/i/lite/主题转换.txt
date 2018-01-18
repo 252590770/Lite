@@ -1,0 +1,78 @@
+/*
+    主题转换
+    {
+
+
+            App.getAPI().getListWithRx(new GetListParam("orderListbyid", "201712121529117659"))
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnNext(new Consumer<ArrayList<GetListResult>>() {
+                @Override
+                public void accept(@NonNull final ArrayList<GetListResult> getListResults) throws Exception {
+                    getPosition.getArea(getListResults);
+                }
+            })
+                    .observeOn(Schedulers.io())
+                    .flatMap(new Function<ArrayList<GetListResult>, ObservableSource<DrivigOrderResult>>() {
+                @Override
+                public ObservableSource<DrivigOrderResult> apply(@NonNull ArrayList<GetListResult> getListResults) throws Exception {
+                    return App.getAPI().getDrivigOrder(new DrivigOrderParam("orderListbyid","201712121529117659"));
+                }
+            })
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnNext(new Consumer<DrivigOrderResult>() {
+                @Override
+                public void accept(@NonNull DrivigOrderResult result) throws Exception {
+                    getPosition.getPosition(result);
+                }
+            })
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Consumer<DrivigOrderResult>() {
+                @Override
+                public void accept(@NonNull DrivigOrderResult drivigOrderResult) throws Exception {
+                    getPosition.getPosition(drivigOrderResult);
+                }
+            });
+
+    }
+
+    */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*
+        另一种写法
+        App.getAPI().getListWithRx(param.method,param.order_id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<ArrayList<GetListResult>>() {
+                    @Override
+                    public void accept(@NonNull ArrayList<GetListResult> getListResults) throws Exception {
+
+
+                        try {
+
+                            getListInfoListener.onSuccess(getListResults);
+
+                        }catch (Exception e){
+                            getListInfoListener.onError(null);
+                            Log.i("ccccccc","onError="+e.toString());
+                            Log.i("ccccccc","name  onError="+InfoListModelImpl.this.toString());
+                        }
+
+
+                    }
+                });
+
+        */
