@@ -207,7 +207,7 @@ public class MyActivity extends Activity  {
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
         intent.putExtra("output", imageUriFromCamera);
 
-        startActivityForResult(intent, 5001);
+        startActivityForResult(intent, GET_IMAGE_BY_CAMERA);
 
     }
 
@@ -215,7 +215,7 @@ public class MyActivity extends Activity  {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction("android.intent.action.GET_CONTENT");
-        startActivityForResult(intent, 5002);
+        startActivityForResult(intent, GET_IMAGE_FROM_PHONE);
     }
 
     public static Uri createImagePathUri(Context context) {
