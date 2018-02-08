@@ -6,16 +6,12 @@ import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 
-import org.json.JSONObject;
-
 import java.io.IOException;
 
 import okhttp3.ResponseBody;
 import retrofit2.Converter;
 
 public class CustomResponseConverter<T> implements Converter<ResponseBody, T> {
-
-    GsonResponseBodyConverter converter;
 
     private final Gson gson;
     private final TypeAdapter<T> adapter;
