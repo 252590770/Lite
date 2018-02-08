@@ -6,7 +6,6 @@ import android.util.Log;
 
 import com.i.lite.api.API;
 import com.i.lite.config.CacheInterceptor;
-import com.i.lite.config.HttpCache;
 import com.i.lite.utils.CrashHandler;
 
 import java.util.concurrent.TimeUnit;
@@ -15,7 +14,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.gson.CustomConverterFactory;
 
 /**
  * Created by L on 2018/1/12.
@@ -68,7 +67,7 @@ public class App extends Application {
     private static void initRetrofit() {
         retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.0.253:8080/")
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(CustomConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)
                 .build();
