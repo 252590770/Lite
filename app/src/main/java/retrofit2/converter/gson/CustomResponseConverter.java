@@ -25,11 +25,10 @@ public class CustomResponseConverter<T> implements Converter<ResponseBody, T> {
     @Override
     public T convert(ResponseBody value) throws IOException {
 
-        Log.i("cccccc","jsonStr-------->  "+value.string());
-
-        JsonReader jsonReader = gson.newJsonReader(value.charStream());
         try {
-            return adapter.read(jsonReader);
+            String body = value.string();
+            Log.i("cccccc","jsonStr-------->  "+body);
+            return adapter.fromJson(body);
         } finally {
             value.close();
         }
