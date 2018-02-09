@@ -26,7 +26,11 @@ public class CustomResponseConverter<T> implements Converter<ResponseBody, T> {
 
         try {
             String body = value.string();
-            Log.i("cccccc","jsonStr-------->  "+body);
+
+            String name = adapter.fromJson(body).getClass().getName();
+            String simpleName = adapter.fromJson(body).getClass().getSimpleName();
+            Log.i("cccccc","name-------->  "+name);
+            Log.i("cccccc","bean-------->  "+simpleName+"            jsonStr-------->  "+body);
             return adapter.fromJson(body);
         } finally {
             value.close();
