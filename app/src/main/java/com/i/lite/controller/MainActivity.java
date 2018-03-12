@@ -26,6 +26,7 @@ import com.i.lite.utils.MyProgressDialog;
 
 import java.util.ArrayList;
 
+//20180312  修改测试
 public class MainActivity extends Activity implements OnNewsListener ,OnGetListInfoListener {
 
     TextView tv;
