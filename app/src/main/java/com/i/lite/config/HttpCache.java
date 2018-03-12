@@ -17,7 +17,7 @@ public class HttpCache {
 
     public static Cache getCache() {
         return new Cache(new File(App.getContext().getCacheDir().getAbsolutePath()
-                + File.separator + "data/NetCache"),
+                + File.separator /*+ "data/NetCache"*/),
                 HTTP_RESPONSE_DISK_CACHE_MAX_SIZE);
     }
 }

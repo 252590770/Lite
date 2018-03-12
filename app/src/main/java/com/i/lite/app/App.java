@@ -2,19 +2,25 @@ package com.i.lite.app;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Environment;
 import android.util.Log;
 
 import com.i.lite.api.API;
 import com.i.lite.config.CacheInterceptor;
+import com.i.lite.finals.Constant;
 import com.i.lite.utils.CrashHandler;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.CustomConverterFactory;
+
+import static com.i.lite.finals.Constant.CACHE_PATH;
 
 /**
  * Created by L on 2018/1/12.
@@ -33,6 +39,16 @@ public class App extends Application {
         //全局错误日志打印
         CrashHandler crashHandler = CrashHandler.getInstance();
         crashHandler.init(getApplicationContext());
+        mkDirs();
+    }
+
+    //创建文件夹
+    public void mkDirs(){
+
+        File dir = new File(Constant.CACHE_PATH);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
 
     }
 
@@ -51,10 +67,10 @@ public class App extends Application {
         Log.i("ccccccc", "api=" + api.toString());
         Log.i("ccccccc", "retrofit=" + retrofit.toString());
 
+
         return api;
 
     }
-
 
     public static Retrofit getRetrofit() {
 
@@ -78,31 +94,29 @@ public class App extends Application {
     private static CacheInterceptor cacheInterceptor = new CacheInterceptor();
 
 
-    static OkHttpClient.Builder builder = new OkHttpClient.Builder()
-                                                .connectTimeout(TIMEOUT_CONNECTION, TimeUnit.SECONDS)//单位是秒
-                                                .readTimeout(TIMEOUT_READ, TimeUnit.SECONDS);
-
-    static OkHttpClient okHttpClient = builder.build();
-
+    private static final long cacheSize = 1024 * 1024 * 20;// 缓存文件最大限制大小20M
+    private static String cacheDirectory = Environment.getExternalStorageDirectory() +CACHE_PATH; // 设置缓存文件路径
+    private static Cache cache = new Cache(new File(cacheDirectory), cacheSize);  //
 
     /**
      * okhttp
      */
-//    private static OkHttpClient okHttpClient = new OkHttpClient.Builder()
-//            //打印日志
-////            .addInterceptor(getInterceptor())
-//            //设置Cache拦截器
-////            .addNetworkInterceptor(cacheInterceptor)
-////            .addInterceptor(cacheInterceptor)
-//            //缓存大小
-//            .cache(HttpCache.getCache())
-//            //time out
-//            .connectTimeout(TIMEOUT_CONNECTION, TimeUnit.SECONDS)
-//            .readTimeout(TIMEOUT_READ, TimeUnit.SECONDS)
-//            .writeTimeout(TIMEOUT_READ, TimeUnit.SECONDS)
-//            //失败重连
-//            .retryOnConnectionFailure(true)
-//            .build();
+    private static OkHttpClient okHttpClient = new OkHttpClient.Builder()
+            //打印日志
+            .addInterceptor(getInterceptor())
+            //设置Cache拦截器
+            .addNetworkInterceptor(cacheInterceptor)
+            .addInterceptor(cacheInterceptor)
+            //缓存大小
+            .cache(cache)
+            //time out
+            .connectTimeout(TIMEOUT_CONNECTION, TimeUnit.SECONDS)
+            .readTimeout(TIMEOUT_READ, TimeUnit.SECONDS)
+            .writeTimeout(TIMEOUT_READ, TimeUnit.SECONDS)
+            //失败重连
+            .retryOnConnectionFailure(true)
+            .build();
+
 
 
     /**
@@ -118,7 +132,7 @@ public class App extends Application {
                 new HttpLoggingInterceptor.Logger() {
                     @Override
                     public void log(String message) {
-                        Log.d("Custom", "--->" + message);
+                        Log.i("cccccc", "--->" + message);
                     }
                 });
         loggingInterceptor.setLevel(level);

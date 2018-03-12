@@ -54,14 +54,14 @@ public class MainActivity extends Activity implements OnNewsListener ,OnGetListI
     public void getNews(View view) {
 
 
-//        progressDialog.showPop();
-//        model.getInfoList(new GetListParam("getDrivig",order_id+""),this);
-//
-//        Log.i("ccccccc","model="+model.toString());
-//        Log.i("ccccccc","order_id="+order_id);
+        progressDialog.showPop();
+        model.getInfoList(new GetListParam("getDrivig",order_id+""),this);
+
+        Log.i("ccccccc","model="+model.toString());
+        Log.i("ccccccc","order_id="+order_id);
 //        order_id++;
 
-        playMedia();
+//        playMedia();
 
 
     }
@@ -165,8 +165,8 @@ public class MainActivity extends Activity implements OnNewsListener ,OnGetListI
 
     public void onNext(View view) {
 
-        showGPSDialog(2,"提示","接单成功，导航至乘客位置");
-//        startActivity(new Intent(this,MyActivity.class));
+//        showGPSDialog(2,"提示","接单成功，导航至乘客位置");
+        startActivity(new Intent(this,MyActivity.class));
 
     }
 
