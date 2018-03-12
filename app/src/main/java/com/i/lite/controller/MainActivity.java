@@ -119,50 +119,6 @@ public class MainActivity extends Activity implements OnNewsListener ,OnGetListI
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @Override
     public void onSuccess(NewsEntity newsEntity) {
         Log.i("cccccc",newsEntity.toString());
@@ -213,15 +169,6 @@ public class MainActivity extends Activity implements OnNewsListener ,OnGetListI
 //        startActivity(new Intent(this,MyActivity.class));
 
     }
-
-
-
-
-
-
-
-
-
 
 
 
@@ -368,9 +315,6 @@ public class MainActivity extends Activity implements OnNewsListener ,OnGetListI
         dialog.getWindow().setContentView(view);
     }
     //提示对话框
-
-
-
 
 
 
