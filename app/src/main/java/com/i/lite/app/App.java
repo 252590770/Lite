@@ -82,7 +82,7 @@ public class App extends Application {
 
     private static void initRetrofit() {
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.253:8080/")
+                .baseUrl(Constant.baseUrl)
                 .addConverterFactory(CustomConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)
@@ -94,7 +94,8 @@ public class App extends Application {
     private static CacheInterceptor cacheInterceptor = new CacheInterceptor();
 
 
-    private static final long cacheSize = 1024 * 1024 * 20;// 缓存文件最大限制大小20M
+//    private static final long cacheSize = 1024 * 1024 * 20;// 缓存文件最大限制大小20M
+    private static final long cacheSize = 1024 ;// 缓存文件最大限制大小20M
     private static String cacheDirectory = Environment.getExternalStorageDirectory() +CACHE_PATH; // 设置缓存文件路径
     private static Cache cache = new Cache(new File(cacheDirectory), cacheSize);  //
 

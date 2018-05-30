@@ -48,6 +48,7 @@
         android:background="@color/colorPrimary"
         android:padding="15dp"
         android:onClick="onNext"
+        android:visibility="gone"
         />
 
 

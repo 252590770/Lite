@@ -25,4 +25,17 @@ public class Constant {
     //更新路径
     public static final String UPDATE_PATH =  Project_PATH+ "update/";
 
+
+
+    public static final String IP = "220.174.161.163";//大庆
+    public static final int PORT = 8088;
+    public static final String baseUrl = "http://"+IP+":"+PORT+"/";
+
+
+
+
+
+
+
+
 }

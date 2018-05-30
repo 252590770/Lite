@@ -30,6 +30,7 @@ import com.i.lite.entity.NewsEntity;
 import com.i.lite.inter.OnGetListInfoListener;
 import com.i.lite.inter.OnNewsListener;
 import com.i.lite.model.modelimpl.InfoListModelImpl;
+import com.i.lite.update.UpdateManager;
 import com.i.lite.utils.MyProgressDialog;
 
 import java.io.IOException;
@@ -54,8 +55,11 @@ public class MainActivity extends Activity implements OnNewsListener ,OnGetListI
     public void getNews(View view) {
 
 
-        progressDialog.showPop();
-        model.getInfoList(new GetListParam("getDrivig",order_id+""),this);
+        new UpdateManager(this).checkUpdate(false,100);
+
+//
+//        progressDialog.showPop();
+//        model.getInfoList(new GetListParam("getDrivig",order_id+""),this);
 
         Log.i("ccccccc","model="+model.toString());
         Log.i("ccccccc","order_id="+order_id);
